@@ -1,11 +1,13 @@
 import pandas as pd
 
+# calculating hamming distance for two strings
 def hammimgDist(name,city):
     count = 0
     for i in range(len(name)):
         if (name[i] != city[i]):
             count+=1
     return count
+
 
 def minDist(name,citylist,cityID):
     mindist = 9999999
@@ -19,8 +21,9 @@ def minDist(name,citylist,cityID):
                 mincity = city
     return mincity
 
-df1 = pd.read_csv("/Users/nikhildattatraya.c/Downloads/SaleskenProblemSolving-master/Correct_cities.csv")
 
+# reading data
+df1 = pd.read_csv("/Users/nikhildattatraya.c/Downloads/SaleskenProblemSolving-master/Correct_cities.csv")
 CountryCity = {}
 CityID = {}
 for index, row in df1.iterrows():
@@ -32,8 +35,8 @@ for index, row in df1.iterrows():
     if not row['name'] in CityID:
         CityID[row['name']] = row['id']
 
+# reading misspelled city data
 df2 = pd.read_csv("/Users/nikhildattatraya.c/Downloads/SaleskenProblemSolving-master/Misspelt_cities.csv")
-
 for index, row in df2.iterrows():
     id = minDist(row['misspelt_name'],CountryCity[row['country']],CityID)
     if(row['country'] == "India"):
